@@ -58,7 +58,6 @@ const TimelineEditor = () => {
     <Container>
       <Row>
         <Col>
-          <h1>Timeline Editor</h1>
           <EditModal
             show={showEdit}
             editEvent={editEvent}
@@ -76,41 +75,59 @@ const TimelineEditor = () => {
           />
         </Col>
       </Row>
-      <Row>
-        <Col>
-          <input
-            type="text"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            placeholder="Search..."
-          />
-          <select
-            onChange={(e) => setFilterType(e.target.value)}
-            value={filterType}
-          >
-            <option value="">All Types</option>
-            <option value="accomplishment">Accomplishment</option>
-            <option value="assignment">Assignment</option>
-            <option value="education">Education</option>
-          </select>
+      <Row className="justify-content-md-center">
+        <Col xs lg="2">
+          <Row>
+            <label>Sort By</label>
+          </Row>
+
           <select
             onChange={(e) => setSortOrder(e.target.value)}
             value={sortOrder}
           >
-            <option value="asc">Date Ascending</option>
-            <option value="desc">Date Descending</option>
+            <option value="desc">Newest First</option>
+            <option value="asc">Oldest First</option>
           </select>
-          <Button
-            variant="primary"
-            onClick={() => {
-              setShowCreate(true);
-            }}
+        </Col>
+        <Col xs lg="2">
+          <Row>
+            <label>Filter</label>
+          </Row>
+          <select
+            onChange={(e) => setFilterType(e.target.value)}
+            value={filterType}
           >
-            Add Event
-          </Button>
+            <option value="">Show All</option>
+            <option value="accomplishment">Accomplishment</option>
+            <option value="assignment">Assignment</option>
+            <option value="education">Education</option>
+          </select>
+        </Col>
+        <Col xs lg="2" style={{ alignSelf: "self-end" }}>
+          <Row>
+            <Button
+              size="sm"
+              variant="primary"
+              onClick={() => {
+                setShowCreate(true);
+              }}
+            >
+              Add New
+            </Button>
+          </Row>
+        </Col>
+        <Col xs lg="2" style={{ alignSelf: "self-end" }}>
+          <Row>
+            <input
+              type="text"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              placeholder="Search..."
+            />
+          </Row>
         </Col>
       </Row>
-      <Row>
+      <Row className="justify-content-md-center">
         <EventList
           events={filteredEvents}
           searchTerm={searchTerm}

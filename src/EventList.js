@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { ListGroup, Button } from "react-bootstrap";
+import { ListGroup } from "react-bootstrap";
 import EventItem from "./EventItem";
 import DeleteModal from "./DeleteModal";
-import EditModal from "./EditModal";
 
 const EventList = ({
   events,
@@ -12,6 +11,22 @@ const EventList = ({
   setEvent,
   setShowEdit,
 }) => {
+  const eventListStyle = {
+    background:
+      "linear-gradient(180deg, rgba(97,165,232,1) 0%, rgba(94,130,214,1) 35%, rgba(96,107,211,1) 100%)",
+    alignItems: "center",
+    marginTop: "20px",
+  };
+  const timelineStyle = {
+    position: "static",
+    height: "30%",
+    width: "1px",
+    borderLeft: "6px solid #cdd3db",
+    left: "15px",
+    top: "-24px",
+    content: "",
+    paddingBottom: "60px",
+  };
   const [showModal, setShowModal] = useState(false);
   const [selectedEventId, setSelectedEventId] = useState(null);
 
@@ -35,16 +50,21 @@ const EventList = ({
 
   return (
     <>
-      <ListGroup>
+      <ListGroup style={eventListStyle}>
         {events.map((event) => (
-          <EventItem
-            key={event.id}
-            event={event}
-            setEvent={setEvent}
-            setShowEdit={setShowEdit}
-            onDelete={() => handleDeleteClick(event.id)}
-            searchTerm={searchTerm}
-          />
+          <>
+            <EventItem
+              key={event.id}
+              event={event}
+              setEvent={setEvent}
+              setShowEdit={setShowEdit}
+              onDelete={() => handleDeleteClick(event.id)}
+              searchTerm={searchTerm}
+            />
+            <div style={timelineStyle}>
+              <span></span>
+            </div>
+          </>
         ))}
       </ListGroup>
       <DeleteModal
